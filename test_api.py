@@ -24,6 +24,6 @@ def test_nieistniejacy_uzytkownik():
 def test_tworzenie_posta():
     nowy_post = {"title": "Test", "body": "Treść", "userId": 1}
     odpowiedz = requests.post(f"{BASE_URL}/posts", json=nowy_post)
-    dane = odpowiedz.json()
     assert odpowiedz.status_code == 201
+    dane = odpowiedz.json()
     assert dane["title"] == "Test"
