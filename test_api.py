@@ -10,7 +10,8 @@ def test_status_uzytkownika():
 def test_dane_uzytkownika():
     odpowiedz = requests.get(f"{BASE_URL}/users/1")
     dane = odpowiedz.json()
-    assert dane["name"] == "Leanne Graham" and dane["username"] == "Bret"
+    assert dane["name"] == "Leanne Graham"
+    assert dane["username"] == "Bret"
 
 def test_liczba_uzytkownikow():
     odpowiedz = requests.get(f"{BASE_URL}/users")
@@ -20,5 +21,9 @@ def test_nieistniejacy_uzytkownik():
     odpowiedz = requests.get(f"{BASE_URL}/users/999")
     assert odpowiedz.status_code == 404
 
-nowy_post = {"title": "Test", "body": "Treść", "userId": 1}
-odpowiedz = requests.post(f"{BASE_URL}/posts", json=nowy_post)
+def test_tworzenie_posta():
+    nowy_post = {"title": "Test", "body": "Treść", "userId": 1}
+    odpowiedz = requests.post(f"{BASE_URL}/posts", json=nowy_post)
+    dane = odpowiedz.json()
+    assert odpowiedz.status_code == 201
+    assert dane["title"] == "Test"
