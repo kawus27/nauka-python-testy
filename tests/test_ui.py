@@ -15,7 +15,7 @@ def test_tytul_strony(page: Page):
 
 def test_poprawne_logowanie(page: Page):
     zaloguj(page, "standard_user", "secret_sauce")
-    expect(page).to_have_url("https://www.saucedemo.com/inventory.html")
+    expect(page).to_have_url(f"{BASE_URL}/inventory.html")
     expect(page.locator("[data-test='title']")).to_have_text("Products")
 
 def test_zle_haslo(page: Page):
