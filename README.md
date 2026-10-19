@@ -7,5 +7,7 @@ Nic ciekawego, po prostu nauka od podstaw
 - Unit testy w pytest z parametryzacją
 
 ## How to run tests
+```
 pip install pytest
 python -m pytest -v
+```
