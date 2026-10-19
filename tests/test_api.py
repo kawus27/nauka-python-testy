@@ -1,15 +1,18 @@
 import requests
+import pytest
 
 BASE_URL = "https://jsonplaceholder.typicode.com"
 
+@pytest.fixture
+def uzytkownik_1():
+    return requests.get(f"{BASE_URL}/users/1")
 
-def test_status_uzytkownika():
-    odpowiedz = requests.get(f"{BASE_URL}/users/1")
-    assert odpowiedz.status_code == 200
+def test_status_uzytkownika(uzytkownik_1):
+    assert uzytkownik_1.status_code == 200
 
-def test_dane_uzytkownika():
-    odpowiedz = requests.get(f"{BASE_URL}/users/1")
-    dane = odpowiedz.json()
+def test_dane_uzytkownika(uzytkownik_1):
+    
+    dane = uzytkownik_1.json()
     assert dane["name"] == "Leanne Graham"
     assert dane["username"] == "Bret"
 
