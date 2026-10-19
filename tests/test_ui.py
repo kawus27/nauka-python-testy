@@ -33,4 +33,4 @@ def test_dodanie_do_koszyka(page: Page):
     inventory_page = InventoryPage(page)
     expect(inventory_page.tytul_strony).to_contain_text("Products")
     inventory_page.dodaj_plecak_do_koszyka()
-    expect(inventory_page.koszyk_licznik).to_contain_text("1")
+    expect(inventory_page.koszyk_licznik).to_have_text("1")
