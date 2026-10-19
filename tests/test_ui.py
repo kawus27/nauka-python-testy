@@ -31,6 +31,6 @@ def test_dodanie_do_koszyka(page: Page):
     login_page.otworz()
     login_page.zaloguj("standard_user", "secret_sauce")
     inventory_page = InventoryPage(page)
-    expect(inventory_page.tytul_strony).to_contain_text("Products")
+    expect(inventory_page.tytul_strony).to_have_text("Products")
     inventory_page.dodaj_plecak_do_koszyka()
     expect(inventory_page.koszyk_licznik).to_have_text("1")
