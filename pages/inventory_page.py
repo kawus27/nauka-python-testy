@@ -8,4 +8,4 @@ class InventoryPage:
         self.tytul_strony = page.locator("[data-test='title']")
 
     def dodaj_plecak_do_koszyka(self):
-        self.dodaj_do_koszyka.click()
+        self.przycisk_dodaj_plecak.click()
