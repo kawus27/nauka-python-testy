@@ -8,6 +8,6 @@ Nic ciekawego, po prostu nauka od podstaw
 
 ## How to run tests
 ```
-pip install pytest
+python -m pip install -r requirements.txt
 python -m pytest -v
 ```
