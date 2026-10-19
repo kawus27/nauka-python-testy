@@ -1,34 +1,27 @@
 from playwright.sync_api import Page, expect
 
+BASE_URL = "https://www.saucedemo.com"
+
+def zaloguj(page: Page, login, haslo):
+    page.goto(BASE_URL)
+    page.locator("[data-test='username']").fill(login)
+    page.locator("[data-test='password']").fill(haslo)
+    page.locator("[data-test='login-button']").click()
+
 def test_tytul_strony(page: Page):
-    page.goto("https://www.saucedemo.com")
+    page.goto(BASE_URL)
     expect(page).to_have_title("Swag Labs")
 
 
 def test_poprawne_logowanie(page: Page):
-    page.goto("https://www.saucedemo.com")
-    page.locator("[data-test=\"username\"]").click()
-    page.locator("[data-test=\"username\"]").fill("standard_user")
-    page.locator("[data-test=\"password\"]").click()
-    page.locator("[data-test=\"password\"]").fill("secret_sauce")
-    page.locator("[data-test=\"login-button\"]").click()
+    zaloguj(page, "standard_user", "secret_sauce")
     expect(page).to_have_url("https://www.saucedemo.com/inventory.html")
-    expect(page.locator("[data-test=\"title\"]")).to_have_text("Products")
+    expect(page.locator("[data-test='title']")).to_have_text("Products")
 
 def test_zle_haslo(page: Page):
-    page.goto("https://www.saucedemo.com/")
-    page.locator("[data-test=\"username\"]").click()
-    page.locator("[data-test=\"username\"]").fill("standard_user")
-    page.locator("[data-test=\"password\"]").click()
-    page.locator("[data-test=\"password\"]").fill("zlehaslo")
-    page.locator("[data-test=\"login-button\"]").click()
-    expect(page.locator("[data-test=\"error\"]")).to_contain_text("Username and password do not match")
+    zaloguj(page, "standard_user", "zlehaslo")
+    expect(page.locator("[data-test='error']")).to_contain_text("Username and password do not match")
 
 def test_zablokowany_uzytkownik(page: Page):
-    page.goto("https://www.saucedemo.com/")
-    page.locator("[data-test=\"username\"]").click()
-    page.locator("[data-test=\"username\"]").fill("locked_out_user")
-    page.locator("[data-test=\"password\"]").click()
-    page.locator("[data-test=\"password\"]").fill("secret_sauce")
-    page.locator("[data-test=\"login-button\"]").click()
-    expect(page.locator("[data-test=\"error\"]")).to_contain_text("this user has been locked out")
+    zaloguj(page, "locked_out_user", "secret_sauce")
+    expect(page.locator("[data-test='error']")).to_contain_text("this user has been locked out")
