@@ -1,6 +1,5 @@
 from playwright.sync_api import Page, expect
 from pages.login_page import LoginPage, BASE_URL
-from pages.cart_page import CartPage
 
 def test_tytul_strony(page: Page):
     page.goto(BASE_URL)
