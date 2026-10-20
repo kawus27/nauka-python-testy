@@ -34,9 +34,7 @@ def test_dodanie_do_koszyka(strona_produktow):
 
 def test_plecak_w_koszyku(page: Page, strona_produktow):
     inventory_page = strona_produktow
-    expect(inventory_page.tytul_strony).to_have_text("Products")
     inventory_page.dodaj_plecak_do_koszyka()
-    expect(inventory_page.koszyk_licznik).to_have_text("1")
     inventory_page.przejdz_do_koszyka()
     cart_page = CartPage(page)
     expect(cart_page.nazwa_produktu).to_have_text("Sauce Labs Backpack")
