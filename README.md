@@ -1,3 +1,4 @@
+![Testy](https://github.com/kawus27/nauka-python-testy/actions/workflows/testy.yml/badge.svg)
 # Nauka Pytona i podstaw automatyzacji testów
 
 Nic ciekawego, po prostu nauka od podstaw
