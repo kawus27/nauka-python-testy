@@ -6,6 +6,11 @@ class InventoryPage:
         self.przycisk_dodaj_plecak = page.locator("[data-test='add-to-cart-sauce-labs-backpack']")
         self.koszyk_licznik = page.locator("[data-test='shopping-cart-badge']")
         self.tytul_strony = page.locator("[data-test='title']")
+        self.ikona_koszyka = page.locator("[data-test='shopping-cart-link']")
 
     def dodaj_plecak_do_koszyka(self):
         self.przycisk_dodaj_plecak.click()
+
+    def przejdz_do_koszyka(self):
+        self.ikona_koszyka.click()
+        self.page.locator("[data-test='cart-list']").wait_for()

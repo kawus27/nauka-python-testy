@@ -1,6 +1,6 @@
 from playwright.sync_api import Page, expect
 from pages.login_page import LoginPage, BASE_URL
-from pages.inventory_page import InventoryPage
+from pages.cart_page import CartPage
 
 def test_tytul_strony(page: Page):
     page.goto(BASE_URL)
@@ -26,11 +26,17 @@ def test_zablokowany_uzytkownik(page: Page):
     expect(login_page.komunikat_bledu).to_contain_text("this user has been locked out")
 
 
-def test_dodanie_do_koszyka(page: Page):
-    login_page = LoginPage(page)
-    login_page.otworz()
-    login_page.zaloguj("standard_user", "secret_sauce")
-    inventory_page = InventoryPage(page)
+def test_dodanie_do_koszyka(strona_produktow):
+    inventory_page = strona_produktow
     expect(inventory_page.tytul_strony).to_have_text("Products")
     inventory_page.dodaj_plecak_do_koszyka()
     expect(inventory_page.koszyk_licznik).to_have_text("1")
+
+def test_plecak_w_koszyku(page: Page, strona_produktow):
+    inventory_page = strona_produktow
+    expect(inventory_page.tytul_strony).to_have_text("Products")
+    inventory_page.dodaj_plecak_do_koszyka()
+    expect(inventory_page.koszyk_licznik).to_have_text("1")
+    inventory_page.przejdz_do_koszyka()
+    cart_page = CartPage(page)
+    expect(cart_page.nazwa_produktu).to_have_text("Sauce Labs Backpack")
