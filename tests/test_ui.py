@@ -26,10 +26,9 @@ def test_zablokowany_uzytkownik(page: Page):
 
 
 def test_dodanie_do_koszyka(strona_produktow):
-    inventory_page = strona_produktow
-    expect(inventory_page.tytul_strony).to_have_text("Products")
-    inventory_page.dodaj_plecak_do_koszyka()
-    expect(inventory_page.koszyk_licznik).to_have_text("1")
+    expect(strona_produktow.tytul_strony).to_have_text("Products")
+    strona_produktow.dodaj_plecak_do_koszyka()
+    expect(strona_produktow.koszyk_licznik).to_have_text("1")
 
 def test_plecak_w_koszyku(strona_produktow):
     strona_produktow.dodaj_plecak_do_koszyka()
