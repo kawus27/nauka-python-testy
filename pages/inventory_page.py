@@ -1,4 +1,5 @@
 from playwright.sync_api import Page
+from pages.cart_page import CartPage
 
 class InventoryPage:
     def __init__(self, page: Page):
@@ -13,4 +14,6 @@ class InventoryPage:
 
     def przejdz_do_koszyka(self):
         self.ikona_koszyka.click()
-        self.page.locator("[data-test='cart-list']").wait_for()
+        koszyk = CartPage(self.page)
+        koszyk.poczekaj_na_zaladowanie()
+        return koszyk
